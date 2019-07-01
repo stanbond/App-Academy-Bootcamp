@@ -1,33 +1,38 @@
-#my_map = [[k1, v1], [k2, v2], [k3, v2]]
 class Map
-    def initialize
+  def initialize
+    @underlying_array = []
+  end
 
+  def set(key, value)
+    pair_index = underlying_array.index { |pair| pair[0] == key }
+    if pair_index
+      underlying_array[pair_index][1] = value
+    else
+      underlying_array.push([key, value])
     end
+    value
+  end
 
-    def set(key, value)
-        .each{|k,v| self[0][0]== key, self[0][1]== value}
-    end
+  def get(key)
+    underlying_array.each { |pair| return pair[1] if pair[0] == key }
+    nil
+  end
 
-    def get(key)
+  def delete(key)
+    value = get(key)
+    underlying_array.reject! { |pair| pair[0] == key }
+    value
+  end
 
-    end
+  def show
+    deep_dup(underlying_array)
+  end
 
-    def delete(key)
+  private
 
-    end
-
-    def show
-
-    end
-
+  attr_reader :underlying_array
+  
+  def deep_dup(arr)
+    arr.map { |el| el.is_a?(Array) ? deep_dup(el) : el }
+  end  
 end
-
-# Our Map class should have the following instance methods: 
-# set(key, value), 
-# get(key), 
-# delete(key), 
-# show. 
-# Note that the set method can be used to either create a 
-# new key-value pair or 
-# update the value for a pre-existing key. 
-# It's up to you to check whether a key currently exists!
