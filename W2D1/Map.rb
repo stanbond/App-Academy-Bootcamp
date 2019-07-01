@@ -1,11 +1,11 @@
-my_map = [[k1, v1], [k2, v2], [k3, v2]]
+#my_map = [[k1, v1], [k2, v2], [k3, v2]]
 class Map
     def initialize
 
     end
 
     def set(key, value)
-
+        .each{|k,v| self[0][0]== key, self[0][1]== value}
     end
 
     def get(key)
