@@ -40,6 +40,10 @@ class TreeNode
     nil
   end
 
+  def inspect
+    @value.inspect
+  end
+
   def path
     if self.parent.nil?
       return [self.value]
