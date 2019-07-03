@@ -5,14 +5,14 @@ class SuperComputerPlayer < ComputerPlayer
   def move(game, mark)
       new_node = TicTacToeNode.new(game.board, mark)
 
-      possible_move = new_node.children.find { |child| child.winning_node?(mark) }
-      return possible_move.prev_move_pos if possible_move
+      new_node = new_node.children.find { |child| child.winning_node?(mark) }
+      return new_node.prev_move_pos if new_node
 
-      op_mark = mark == :x ? :o : :x
+      #op_mark = mark == :x ? :o : :x
 
-      blocking_node = TicTacToeNode.new(game.board, op_mark)
-      blocking_move = blocking_node.children.find { |child| child.winning_node?(op_mark) }
-      return blocking_move.prev_move_pos if blocking_move
+      new_node = new_node.find { |child| !child.losing_node?(mark) }
+
+      return new_node.prev_move_pos if new_node
 
       raise "No winning or draw move"
   end
