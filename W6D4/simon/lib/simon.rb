@@ -39,12 +39,13 @@ class Simon
 
   def require_sequence
     puts "repeat after me"
+
     user_color = gets.chomp
       if color[0] != user_color
         @game_over = true
-        break
+        #break
       end
-    end
+    
   end
 
   def add_random_color
