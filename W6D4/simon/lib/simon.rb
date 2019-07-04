@@ -31,12 +31,20 @@ class Simon
 
   def show_sequence
     add_random_color
+    @seq.each do |color|
+      puts color
+      system("clear")
+    end
   end
 
   def require_sequence
     puts "repeat after me"
-    take_turn
-    guess = gets.chomp
+    user_color = gets.chomp
+      if color[0] != user_color
+        @game_over = true
+        break
+      end
+    end
   end
 
   def add_random_color
