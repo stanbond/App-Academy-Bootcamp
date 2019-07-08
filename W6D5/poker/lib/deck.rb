@@ -2,7 +2,7 @@ require_relative './card'
 require_relative './hand'
 
 class Deck
-  #What is this? What does it do?
+  
   def self.all_cards
     deck = []
     Card::SUIT_STRINGS.keys.each do |suit|
