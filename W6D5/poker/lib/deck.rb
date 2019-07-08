@@ -1,25 +1,40 @@
-require_relative 'card'
+require_relative './card'
+require_relative './hand'
 
 class Deck
-  attr_reader :cards
-  def initialize
-    @cards = []
-    fill_deck
+  #What is this? What does it do?
+  def self.all_cards
+    deck = []
+    Card::SUIT_STRINGS.keys.each do |suit|
+      Card::VALUE_STRINGS.keys.each do |value|
+        deck << Card.new(suit, value)
+      end
+    end
+    deck
   end
 
-  def fill_deck
+  def initialize(cards = Deck.all_cards)
+    @cards = cards
+  end
 
-    pairs = Card::VALUE_STRINGS.keys.product(Card::SUIT_STRINGS.keys)
-    pairs.each{ |pair| @cards << Card.new(*pair) }
+  def deal_hand
+    Hand.new(take(5))
+  end
 
+  def count
+    @cards.count
+  end
+
+  def take(n)
+    raise "not enough cards" if n > count
+    @cards.shift(n)
+  end
+
+  def return(cards)
+    @cards.push(*cards)
   end
 
   def shuffle
-     @cards.shuffle!
+    @cards.shuffle!
   end
-
-  def deal(num_cards)
-    @cards.pop(num_cards)
-  end
-
 end
