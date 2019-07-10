@@ -1,0 +1,43 @@
+/* CORRESPONDING HTML 
+DIV TAGS */
+/* SHARED DIV PROPERTIES */
+#first-div, #second-div {
+  width: 200px;
+  height: 200px;
+  padding: 50px;
+  border: 5px solid black;
+}
+/* UNIQUE DIV PROPERTIES */
+#first-div {
+  background-color: #39cccc;
+}
+
+#second-div {
+  background-color: #ff4136;
+  box-sizing: border-box;
+
+}
+
+/* ALL P TAG TEXT */
+p {
+  background-color: #7fdbff;
+
+}
+
+/* THESE ARE DIV CLASSES */
+.min-height-div {
+  min-height: 10px;
+}
+
+.image-1-container {
+  width: 200px;
+  height: 600px;
+  background: grey;
+}
+
+.image-2-container {
+  display: inline-block;
+  min-width: 200px;
+  height: 600px;
+  background: grey;
+}
