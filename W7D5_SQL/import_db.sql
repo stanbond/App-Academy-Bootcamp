@@ -1,26 +1,18 @@
--- a table for cats
--- each cat should have an id, name, color, and a breed
 
--- a table toys
--- each toy should have an id, price, color and a name
-
--- a table for cattoys
--- (which will be the connection between cats and toys)
--- each cattoy should have an id, a cat_id and a toy_id
-DROP TABLE cats 
-DROP TABLE toys 
-DROP TABLE cattoys  
+DROP TABLE cats CASCADE;
+DROP TABLE toys CASCADE;
+DROP TABLE cattoys CASCADE; 
 
 CREATE TABLE cats
 (
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(20),
     color VARCHAR(20),
     breed VARCHAR(20)
 );
 
-INSERT INTO 
-    cats(name, color, breed)
+INSERT INTO cats 
+    (name, color, breed)
 VALUES 
     ('fluffy', 'white', 'manx'),
     ('sugar', 'beige', 'tabi'),
@@ -30,14 +22,13 @@ VALUES
 
 CREATE TABLE toys
 (
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(20),
     price VARCHAR(20),
     color VARCHAR(20)
 );
 
-INSERT INTO 
-    toys
+INSERT INTO toys
     (name, price, color)
 VALUES
     ('ball', 19, 'red'),
@@ -48,13 +39,21 @@ VALUES
 
 CREATE TABLE cattoys
 (
-    id SERIAL,
-    cat_id serial,
-    toy_id serial 
+    id SERIAL PRIMARY KEY,
+    cat_id INTEGER NOT NULL,
+    toy_id INTEGER NOT NULL,
+    FOREIGN KEY (cat_id) REFERENCES cats (id), 
+    FOREIGN KEY (toy_id) REFERENCES toys (id) 
 );
 
--- INSERT INTO
---  toys
---     (name, color, price)
--- VALUES
---     (‘String’, ‘yellow’, 1);
+INSERT INTO cattoys
+    (cat_id, toy_id)
+VALUES 
+    ((SELECT id FROM cats WHERE cats.name = 'fluffy'),
+    (SELECT id FROM toys WHERE toys.name = 'ball')),
+    ((SELECT id FROM cats WHERE cats.name = 'sugar'),
+    (SELECT id FROM toys WHERE toys.name = 'pool'));
+
+
+
+
