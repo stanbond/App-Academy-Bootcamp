@@ -52,8 +52,12 @@ VALUES
     ((SELECT id FROM cats WHERE cats.name = 'fluffy'),
     (SELECT id FROM toys WHERE toys.name = 'ball')),
     ((SELECT id FROM cats WHERE cats.name = 'sugar'),
-    (SELECT id FROM toys WHERE toys.name = 'pool'));
-
-
+    (SELECT id FROM toys WHERE toys.name = 'pool')),
+    ((SELECT id FROM cats WHERE cats.name = 'sue'),
+    (SELECT id FROM toys WHERE toys.name = 'palm tree')),
+    ((SELECT id FROM cats WHERE cats.name = 'tommy'),
+    (SELECT id FROM toys WHERE toys.name = 'pet dog')),
+    ((SELECT id FROM cats WHERE cats.name = 'juice'),
+    (SELECT id FROM toys WHERE toys.name = 'sand box'));
 
 
