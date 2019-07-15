@@ -1,5 +1,5 @@
-CREATE TABLE users
-(id INTEGER PRIMARY KEY,
+CREATE TABLE users(
+    id INTEGER PRIMARY KEY,
     fname TEXT NOT NULL,
     lname TEXT NOT NULL
 );
