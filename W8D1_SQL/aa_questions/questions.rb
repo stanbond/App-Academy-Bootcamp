@@ -1,5 +1,6 @@
 require 'singleton'
 require 'sqlite3'
+require 'byebug'
 
 class QuestionsDatabase < SQLite3::Database
 include Singleton
@@ -33,7 +34,7 @@ class User
     self.new(results.first)
   end
 
-  def find_by_id(id) #RUBY VERSION
+  def self.find_by_id(id) #RUBY VERSION
     find = self.all
     find.each do |user|
       return user if user.id == id
@@ -41,7 +42,7 @@ class User
     return false
   end
 
-  def find_by_name(fname, lname) #RUBY VERSION
+  def self.find_by_name(fname, lname) #RUBY VERSION
     find = self.all
     find.each do |user|
       return user if user.fname == fname && user.lname == lname
@@ -77,6 +78,7 @@ class User
     Reply.find_by_user_id(@id)
   end
 
+#   {'id' => 1, 'fname' => 'Carlos', 'lname' => 'Catly'}
 end
 
 class Question #< User
@@ -90,6 +92,7 @@ class Question #< User
   end
 
   #{'id' => 4, 'title' => 'history', 'body' => 'When was AA started?', 'author_id' => 2}
+  #{'id' => 2, 'title' => 'teacher', 'body' => 'where is Alvin?', 'author_id' => 2}
 
   def self.all
     data = QuestionsDatabase.instance.execute("SELECT * FROM questions")
@@ -110,13 +113,14 @@ class Question #< User
   end
 
   def author
-    @author_id
+    User.find_by_id(@author_id)
     # User.find_by_id(@author_id).fname + User.find_by_id(@author_id).lname
   end
 
   def replies
     Reply.find_by_question_id(@id)
   end
+
 
 end
 
@@ -134,7 +138,10 @@ class Question_follow
     @user_id = options['user_id']
   end
 
-  def find_by_id(id) #RUBY VERSION
+    
+  #   {'id'=> 2 , 'question_id' => 2, 'user_id' => 2}
+
+  def self.find_by_id(id) #RUBY VERSION
     find = self.all
     find.each do |question|
       return question if question.id == id
@@ -178,6 +185,8 @@ class Reply
     @user_id = options['user_id']
     @parent_id = options['parent_id']
   end
+# {'id' => 1, 'body' => 'New York', 'question_id' => 2, 'user_id' => 2, 'parent_id' => 1}
+ # {'id' => 1, 'body' => 'Num thats divisible by only 1 and itself', 'question_id' => 1, 'user_id' => 1, 'parent_id' => nil }
 
   def author
     User.find_by_id(@user_id)
@@ -191,10 +200,12 @@ class Reply
     Reply.find_by_id(@parent_id)
   end
 
+# {'id' => 4, 'body' => 'Thank you', 'question_id' => 1, 'user_id' => 1, 'parent_id' => 1}
   def child_replies
+    # debugger
     children = []
-    question.replies.each do |reply| 
-      children << reply if reply.parent_reply.id = @id  #&& !reply.parent_reply.is_a?(String)
+    question.replies.each do |reply|
+      children << reply if !reply.parent_reply.is_a?(String) && reply.parent_reply.id == @id 
     end
     children
   end
@@ -224,8 +235,11 @@ class Question_like
   end
 end
 
-
-# Reply#author
-# Reply#question
-# Reply#parent_reply
-# Reply#child_replies
+# QuestionFollow::followers_for_question_id(question_id)
+# This will return an array of User objects!
+# QuestionFollow::followed_questions_for_user_id(user_id)
+# Returns an array of Question objects.
+# User#followed_questions
+# One-liner calling QuestionFollow method.
+# Question#followers
+# One-liner calling QuestionFollow method.

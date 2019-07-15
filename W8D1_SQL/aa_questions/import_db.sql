@@ -76,9 +76,10 @@ VALUES
 INSERT INTO
     replies (body, question_id, user_id, parent_id)
 VALUES
-    ('Num thats divisible by only 1 and itself', (SELECT id FROM questions WHERE body = 'what is a prime?'), (SELECT id FROM users WHERE fname = 'Carlos'), NULL), 
-    ('New York',(SELECT id FROM questions WHERE body = 'where is Alvin?'),(SELECT id FROM users WHERE fname = 'Stan'), NULL),
-    ('It''s a base case ever', (SELECT id FROM questions WHERE body = 'what is a base case?'), (SELECT id FROM users WHERE fname = 'Carlos'), NULL);
+    ('Num thats divisible by only 1 and itself', (SELECT id FROM questions WHERE body = 'what is a prime?'), (SELECT id FROM users WHERE fname = 'Stan'), 1), 
+    ('New York',(SELECT id FROM questions WHERE body = 'where is Alvin?'),(SELECT id FROM users WHERE fname = 'Stan'), 1),
+    ('It''s a base case ever', (SELECT id FROM questions WHERE body = 'what is a base case?'), (SELECT id FROM users WHERE fname = 'Carlos'), 2);
+    -- ('Thank you', (SELECT id FROM questions WHERE body = 'what is a prime?'), (SELECT id FROM users WHERE fname = 'Carlos'), (SELECT parent_id FROM replies WHERE body = 'Num thats divisible by only 1 and itself'));
 
 INSERT INTO
     question_likes (question_id, user_id)
