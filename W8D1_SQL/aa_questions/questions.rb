@@ -62,11 +62,19 @@ class User
     return "NON_EXISTANT" if results.empty?
     self.new(results.first)
   end
-
+  
   def initialize(options)
     @id = options['id']
     @fname = options['fname']
     @lname = options['lname']
+  end
+
+  def authored_questions
+    Question.find_by_author_id(@id)
+  end
+
+  def authored_replies
+    Reply.find_by_user_id(@id)
   end
 
 end
@@ -81,17 +89,33 @@ class Question #< User
     @author_id = options['author_id']
   end
 
+  #{'id' => 4, 'title' => 'history', 'body' => 'When was AA started?', 'author_id' => 2}
+
   def self.all
     data = QuestionsDatabase.instance.execute("SELECT * FROM questions")
     data.map {|datum| Question.new(datum)}
   end
 
-  def find_by_id(id) #RUBY VERSION
+  def self.find_by_id(id) #RUBY VERSION
     find = self.all
     find.each do |question|
       return question if question.id == id
     end
     return false
+  end
+
+  def self.find_by_author_id(author_id)
+    questions = QuestionsDatabase.instance.execute('SELECT * FROM questions WHERE author_id = ?', author_id)
+    questions.map{ |question| Question.new(question) }
+  end
+
+  def author
+    @author_id
+    # User.find_by_id(@author_id).fname + User.find_by_id(@author_id).lname
+  end
+
+  def replies
+    Reply.find_by_question_id(@id)
   end
 
 end
@@ -129,6 +153,24 @@ class Reply
     data.map {|datum| Reply.new(datum)}
   end
 
+  def self.find_by_user_id(user_id)
+    questions = QuestionsDatabase.instance.execute('SELECT * FROM replies WHERE user_id = ?', user_id)
+    questions.map{ |question| Reply.new(question) }
+  end
+
+  def self.find_by_question_id(question_id)
+    replies = QuestionsDatabase.instance.execute('SELECT * FROM replies WHERE question_id = ?', question_id)
+    replies.map{ |question| Reply.new(question) }
+  end
+
+  def self.find_by_id(id) #RUBY VERSION
+    find = self.all
+    find.each do |question|
+      return question if question.id == id
+    end
+    return false
+  end
+
   def initialize(options)
     @id = options['id']
     @body = options['body']
@@ -137,13 +179,26 @@ class Reply
     @parent_id = options['parent_id']
   end
 
-  def find_by_id(id) #RUBY VERSION
-    find = self.all
-    find.each do |question|
-      return question if question.id == id
-    end
-    return false
+  def author
+    User.find_by_id(@user_id)
   end
+
+  def question
+    Question.find_by_id(@question_id)
+  end
+
+  def parent_reply
+    Reply.find_by_id(@parent_id)
+  end
+
+  def child_replies
+    children = []
+    question.replies.each do |reply| 
+      children << reply if reply.parent_reply.id = @id  #&& !reply.parent_reply.is_a?(String)
+    end
+    children
+  end
+
 end
 
 class Question_like
@@ -170,16 +225,6 @@ class Question_like
 end
 
 
-
-# Question::find_by_author_id(author_id)
-# Reply::find_by_user_id(user_id)
-# Reply::find_by_question_id(question_id)
-# All replies to the question at any depth.
-# User::find_by_name(fname, lname)
-# User#authored_questions (use Question::find_by_author_id)
-# User#authored_replies (use Reply::find_by_user_id)
-# Question#author
-# Question#replies (use Reply::find_by_question_id)
 # Reply#author
 # Reply#question
 # Reply#parent_reply
