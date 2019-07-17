@@ -1,3 +1,25 @@
+# Table name: actors
+#
+#  id   :bigint           not null, primary key
+#  name :string           not null
+#
+
+# Table name: movies
+#
+#  id          :bigint           not null, primary key
+#  title       :string           not null
+#  yr          :integer          not null
+#  score       :float            not null
+#  votes       :integer          not null
+#  director_id :integer          not null
+
+# Table name: castings
+#
+#  id       :bigint           not null, primary key
+#  actor_id :integer          not null
+#  movie_id :integer          not null
+#  ord      :integer          not null
+
 def eighties_b_movies
   # List all the movies from 1980-1989 with scores falling between
   # 3 and 5 (inclusive).
