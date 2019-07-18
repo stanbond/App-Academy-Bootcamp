@@ -95,11 +95,30 @@ class SQLObject
     @attributes[:id] = DBConnection.last_insert_row_id
   end
 
+  def insert
+    val_array = (['?'] * self.class.columns.length).join(',') #  (?, ?, ?)
+    colm_array = self.class.columns.join(',')                 # (:id, :name, :owner_id)
+    # cat_array = self.attribute_values
+    # data = DBConnection.execute(<<-SQL, cat_array)
+    data = DBConnection.execute(<<-SQL, attribute_values)
+    INSERT INTO
+      #{self.class.table_name} (#{colm_array})
+    VALUES
+      (#{val_array})
+    SQL
+    @attributes[:id] = DBConnection.last_insert_row_id
+  end
+
   def update
-    # ...
+    colm = self.class.columns.map { |col| "#{col} = ?" }.join(',')
+    DBConnection.execute(<<-SQL, attribute_values, attributes[:id] )
+      UPDATE #{self.class.table_name}
+      SET #{colm}
+      WHERE id = ?
+    SQL
   end
 
   def save
-    # ...
+    id.nil? ? insert : update
   end
 end
