@@ -166,7 +166,6 @@ def films_by_cast_size
     movies.title 
   ORDER BY
     COUNT(*) DESC, movies.title ASC
-  
   SQL
 end
 
