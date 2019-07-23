@@ -29,7 +29,6 @@ class User
       WHERE
         id = ?
     SQL
-
     return "Not found" if results.empty?
     self.new(results.first)
   end
@@ -59,11 +58,10 @@ class User
       WHERE
         fname = ? AND lname = ?
     SQL
-
     return "NON_EXISTANT" if results.empty?
     self.new(results.first)
   end
-  
+
   def initialize(options)
     @id = options['id']
     @fname = options['fname']
@@ -77,8 +75,6 @@ class User
   def authored_replies
     Reply.find_by_user_id(@id)
   end
-
-#   {'id' => 1, 'fname' => 'Carlos', 'lname' => 'Catly'}
 end
 
 class Question #< User
@@ -90,9 +86,6 @@ class Question #< User
     @body = options['body']
     @author_id = options['author_id']
   end
-
-  #{'id' => 4, 'title' => 'history', 'body' => 'When was AA started?', 'author_id' => 2}
-  #{'id' => 2, 'title' => 'teacher', 'body' => 'where is Alvin?', 'author_id' => 2}
 
   def self.all
     data = QuestionsDatabase.instance.execute("SELECT * FROM questions")
@@ -120,8 +113,6 @@ class Question #< User
   def replies
     Reply.find_by_question_id(@id)
   end
-
-
 end
 
 class Question_follow
@@ -138,9 +129,6 @@ class Question_follow
     @user_id = options['user_id']
   end
 
-    
-  #   {'id'=> 2 , 'question_id' => 2, 'user_id' => 2}
-
   def self.find_by_id(id) #RUBY VERSION
     find = self.all
     find.each do |question|
@@ -151,7 +139,6 @@ class Question_follow
 
 end
 
-  
 class Reply
   attr_accessor :id, :question_id, :user_id, :body, :parent_id
 
@@ -185,8 +172,6 @@ class Reply
     @user_id = options['user_id']
     @parent_id = options['parent_id']
   end
-# {'id' => 1, 'body' => 'New York', 'question_id' => 2, 'user_id' => 2, 'parent_id' => 1}
- # {'id' => 1, 'body' => 'Num thats divisible by only 1 and itself', 'question_id' => 1, 'user_id' => 1, 'parent_id' => nil }
 
   def author
     User.find_by_id(@user_id)
@@ -200,7 +185,6 @@ class Reply
     Reply.find_by_id(@parent_id)
   end
 
-# {'id' => 4, 'body' => 'Thank you', 'question_id' => 1, 'user_id' => 1, 'parent_id' => 1}
   def child_replies
     # debugger
     children = []
@@ -209,7 +193,6 @@ class Reply
     end
     children
   end
-
 end
 
 class Question_like
@@ -234,12 +217,3 @@ class Question_like
     return false
   end
 end
-
-# QuestionFollow::followers_for_question_id(question_id)
-# This will return an array of User objects!
-# QuestionFollow::followed_questions_for_user_id(user_id)
-# Returns an array of Question objects.
-# User#followed_questions
-# One-liner calling QuestionFollow method.
-# Question#followers
-# One-liner calling QuestionFollow method.

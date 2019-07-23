@@ -20,5 +20,4 @@ class Actor < ApplicationRecord
     class_name: :Movie,
     foreign_key: :director_id,
     primary_key: :id
-
 end
