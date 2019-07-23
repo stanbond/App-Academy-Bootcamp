@@ -84,7 +84,6 @@ class ResizingIntSet
     end
     idx = num % @store.size
     @store[idx] << num
-     
   end
 
   def remove(num)

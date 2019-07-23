@@ -3,8 +3,7 @@ require 'io/console'
 require 'benchmark'
 
 class SortingDemo
- 
- 
+
   def self.my_min(array)
     num= 0
     (0...array.length-1).each do |i|
@@ -12,12 +11,12 @@ class SortingDemo
     end
     num
   end
-    # first = array.first
+    #first = array.first
     # array.each do |el|
     #     first = el if el < first
     # end
     # first
-    # end
+    #end
  
   def self.largest_contiguous_subsum(array) # => 8
     sum = 0
@@ -31,7 +30,7 @@ class SortingDemo
   end
     # sums = 0
     # (0...array.length-1).each do |i|
-    #     num = array[i] + array[i+1] if array[i] + array[i+1] > num 
+    #     num = array[i] + array[i+1] if array[i] + array[i+1] > num
     # end
     # sums
     #end

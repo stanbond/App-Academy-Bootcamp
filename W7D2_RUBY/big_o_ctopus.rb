@@ -61,7 +61,5 @@ end
 p nsquared(fish)
 p linear_check(fish)
 p merge_sort(fish).last
-
 p fast_dance("right-down", new_tiles_data_structure)
 p slow_dance("right-down", tiles_array)
-

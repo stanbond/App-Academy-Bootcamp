@@ -38,11 +38,11 @@ class LinkedList
   end
 
   def first
-    @list.first 
+    @list.first
   end
 
   def last
-    @list.last 
+    @list.last
   end
 
   def empty?
@@ -83,7 +83,6 @@ class LinkedList
     @list.each do |node|
       node.val = val if node.key == key
     end
-
   end
 
   def remove(key)
@@ -101,7 +100,6 @@ class LinkedList
   end
 
   def each
-
     link = @head.next
 
     until link == @tail

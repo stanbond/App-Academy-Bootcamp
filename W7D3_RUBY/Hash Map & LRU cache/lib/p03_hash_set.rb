@@ -14,7 +14,6 @@ class HashSet
     end
     #idx = num % @store.size
     self[num] << num
-     
   end
 
   def include?(num)
@@ -68,7 +67,6 @@ end
 #     end
 #     idx = num % @store.size
 #     @store[idx] << num
-     
 #   end
 
 #   def remove(num)
@@ -103,5 +101,4 @@ end
 #     end
 #     @store = new_arr
 #   end
-
 # end

@@ -100,4 +100,4 @@ class SortingDemo
   end
 end
 
-SortingDemo.run_performance_tests()
+SortingDemo.run_performance_tests
