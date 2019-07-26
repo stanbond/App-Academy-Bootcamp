@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
-  def index
-    @users = User.all
-    render :index
-  end
+  # def index
+  #   @users = User.all
+  #   render :index
+  # end
 
   def new
     @user = User.new
-    #session[]
+    render :new
   end
 
   def create
@@ -15,9 +15,9 @@ class UsersController < ApplicationController
     if @user.save
       login!(@user)
       flash[:notice] = "Welcome to the Jungle"
-      redirect_to #session(:)
+      redirect_to bands_url
     else
-      fash.now[:errors] = @user.errors.full_messages
+      flash.now[:errors] = @user.errors.full_messages
       render :new
     end
   end
@@ -27,5 +27,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :password)
   end
-  
+
 end

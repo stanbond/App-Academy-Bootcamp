@@ -12,8 +12,8 @@
 
 class User < ApplicationRecord
 
-  validates :email, :password_digest, :session_token, presence: true
-  validates :email, :session_token, uniqueness: true
+  validates :email, presence: true
+  validates :password_digest, :session_token, uniqueness: true
   validates :password, length: {minimum: 6, allow_nil: true}
 
   after_initialize :ensure_session_token
@@ -27,11 +27,8 @@ class User < ApplicationRecord
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     
-    if user
-      user if user.is_password?(password)
-    else
-      nil
-    end
+    return nil if user.nil?
+    user.is_password?(password) ? user : nil
   end
 
   def password=(password)
@@ -45,8 +42,8 @@ class User < ApplicationRecord
 
   def reset_session_token
     self.session_token = User.generate_session_token
-    save!
-    session_token
+    self.save!
+    self.session_token
   end
 
   private
