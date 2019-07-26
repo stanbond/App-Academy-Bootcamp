@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
 
     if @user
       login_user!(@user)
+      flash[:notice] = "Welcome back"
       redirect_to bands_url
     else
       flash[:errors] = "You shall not pass with that wrong login info!"
@@ -22,5 +23,5 @@ class SessionsController < ApplicationController
     logout_user!
     redirect_to new_session_url
   end
-  
+
 end
