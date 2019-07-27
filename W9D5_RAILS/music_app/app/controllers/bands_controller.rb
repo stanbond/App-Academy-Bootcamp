@@ -1,5 +1,5 @@
 class BandsController < ApplicationController
-  before_action :require_logged_in
+  #before_action :require_logged_in
 
   def index
     @bands = Band.all
@@ -56,6 +56,7 @@ class BandsController < ApplicationController
 
     if @band.destroy
       redirect_to bands_url
+    end
   end
 
   private
