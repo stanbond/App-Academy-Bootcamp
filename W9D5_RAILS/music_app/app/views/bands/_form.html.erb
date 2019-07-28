@@ -1,6 +1,6 @@
 <% action == :edit ? action_url = band_url(band.id) : action_url = bands_url %>
 
-<form action="<%= action_url %>" method="post">
+<form action="<%=action_url%>" method="post">
   <% if action == :edit %>
     <input type="hidden" name="_method" value="<%= method %>">
   <% end %>

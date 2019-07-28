@@ -1,31 +1,39 @@
 class UsersController < ApplicationController
-  # def index
-  #   @users = User.all
-  #   render :index
-  # end
 
-  def new
-    @user = User.new
-    render :new
-  end
 
   def create
     @user = User.new(user_params)
-
     if @user.save
-      login!(@user)
+      login_user!(@user)
       flash[:notice] = "Welcome to the Jungle"
-      redirect_to bands_url
+      redirect_to new_session_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new
     end
   end
 
+  def new
+      @user = User.new
+      render :new
+  end
+
+
+  def show
+    render :show
+  end
+
+  
+
   private
 
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:password, :email)
   end
 
 end
+
+# def index
+  #   @users = User.all
+  #   render :index
+  # end

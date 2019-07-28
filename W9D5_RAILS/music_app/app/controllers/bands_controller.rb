@@ -1,12 +1,14 @@
 class BandsController < ApplicationController
   #before_action :require_logged_in
-
+  before_action :require_user!, only: %i(new create edit update)
+  
   def index
     @bands = Band.all
     render :index
   end
 
   def new
+    @band = Band.new
     render :new
   end
 
@@ -20,7 +22,6 @@ class BandsController < ApplicationController
       flash[:errors] = @band.errors.full_messages
       render :new
     end
-
   end
 
   def show

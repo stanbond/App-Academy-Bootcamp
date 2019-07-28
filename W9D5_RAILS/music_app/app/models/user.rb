@@ -12,13 +12,16 @@
 
 class User < ApplicationRecord
 
-  validates :email, presence: true
-  validates :password_digest, :session_token, uniqueness: true
-  validates :password, length: {minimum: 6, allow_nil: true}
-
-  after_initialize :ensure_session_token
+  validates :email, presence: true, uniqueness: true
+  # If a password was set, we validate it meets the requirements.
+  # Note the `allow_nil`.
+  validates :password, length: { minimum: 6, allow_nil: true }
+  validates :password_digest, presence: true
+  validates :session_token, presence: true, uniqueness: true
 
   attr_reader :password
+
+  after_initialize :ensure_session_token
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64(16)
@@ -52,3 +55,4 @@ class User < ApplicationRecord
     self.session_token ||= User.generate_session_token
   end
 end
+

@@ -1,16 +1,33 @@
 Rails.application.routes.draw do
-
-
-  
-    resources :users, only: [:new, :create, :index]
+    root to: redirect('/bands')
+    resources :users, only: [:new, :create, :show]#, :index]
     resource :session, only: [:new, :create, :destroy]
-
+    # resources :bands 
     resources :bands do
       resources :albums, only: [:new]
     end
-  
 end
 
+
+
+#   resource :session, only: [:new, :create, :destroy]
+
+#   resources :users, only: [:show, :new, :create] do
+#     get :activate, on: :collection
+#   end
+
+#   resources :bands do
+#     resources :albums, only: [:new]
+#   end
+
+#   resources :albums, only: [:show, :create, :edit, :update, :destroy] do
+#     resources :tracks, only: [:new]
+#   end
+
+#   resources :tracks, only: [:show, :create, :edit, :update, :destroy,]
+
+#   resources :notes, only: [:create, :destroy]
+# end
 
 
 
