@@ -3152,3 +3152,293 @@ Processing by UsersController#new as HTML
 Completed 200 OK in 41ms (Views: 40.1ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/users/new" for ::1 at 2019-07-28 12:48:02 -0600
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/stan/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 342ms (Views: 280.1ms | ActiveRecord: 36.4ms)
+
+
+Started POST "/users" for ::1 at 2019-07-28 12:48:18 -0600
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"Ah05GJ/P0SqXNdP/DBEluEzPC9PPBKSMGvVD60tPXoYbHhe9I2MY1hFrFVEWgSq1zZ2p9XKYUSs7FbwRKvpBMQ==", "user"=>{"email"=>"sbond", "password"=>"[FILTERED]"}}
+  [1m[35m (1.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:5
+  [1m[36mUser Exists (26.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "sbond"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:5
+  [1m[36mUser Exists (1.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "qMXBxAu4FLl92cs_wUZxyQ"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:5
+  [1m[36mUser Create (34.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "sbond"], ["password_digest", "$2a$12$FhGOv/rR/lAzEHu9n2WOCuD5kMRwlb5t7aMCIk1/eF6dJR17Zx/8a"], ["session_token", "qMXBxAu4FLl92cs_wUZxyQ"], ["created_at", "2019-07-28 18:48:18.880696"], ["updated_at", "2019-07-28 18:48:18.880696"]]
+  ↳ app/controllers/users_controller.rb:5
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:5
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:48
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "sbond"], ["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:48
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "P4eoBsCvYORnVmvrtsah0w"], ["id", 12], ["LIMIT", 1]]
+  ↳ app/models/user.rb:48
+  [1m[36mUser Update (1.7ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "P4eoBsCvYORnVmvrtsah0w"], ["updated_at", "2019-07-28 18:48:18.921714"], ["id", 12]]
+  ↳ app/models/user.rb:48
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:48
+Redirected to http://localhost:3000/
+Completed 302 Found in 370ms (ActiveRecord: 66.7ms)
+
+
+Started GET "/" for ::1 at 2019-07-28 12:48:18 -0600
+Started GET "/bands" for ::1 at 2019-07-28 12:48:18 -0600
+Processing by BandsController#index as HTML
+  Rendering bands/index.html.erb within layouts/application
+  [1m[36mBand Load (24.1ms)[0m  [1m[34mSELECT "bands".* FROM "bands"[0m
+  ↳ app/views/bands/index.html.erb:4
+  Rendered bands/index.html.erb within layouts/application (39.3ms)
+Completed 200 OK in 86ms (Views: 46.0ms | ActiveRecord: 30.8ms)
+
+
+Started GET "/bands/new" for ::1 at 2019-07-28 12:48:26 -0600
+Processing by BandsController#new as HTML
+  Rendering bands/new.html.erb within layouts/application
+  Rendered bands/_form.html.erb (296.9ms)
+  Rendered bands/new.html.erb within layouts/application (301.8ms)
+Completed 500 Internal Server Error in 313ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - undefined local variable or method `authenticity_token' for #<#<Class:0x00007fe0ee1347b0>:0x00007fe0e8046688>:
+  app/views/bands/_form.html.erb:8:in `_app_views_bands__form_html_erb___4123177937853175452_70302008361600'
+  app/views/bands/new.html.erb:3:in `_app_views_bands_new_html_erb__1979435454171073451_70301970999720'
+  app/controllers/bands_controller.rb:12:in `new'
+
+Started POST "/__better_errors/628f87e13d9cf752/variables" for ::1 at 2019-07-28 12:48:26 -0600
+Started GET "/bands" for ::1 at 2019-07-28 12:48:37 -0600
+Processing by BandsController#index as HTML
+  Rendering bands/index.html.erb within layouts/application
+  [1m[36mBand Load (0.5ms)[0m  [1m[34mSELECT "bands".* FROM "bands"[0m
+  ↳ app/views/bands/index.html.erb:4
+  Rendered bands/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 52ms (Views: 48.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/bands" for ::1 at 2019-07-28 12:51:23 -0600
+Processing by BandsController#index as HTML
+  Rendering bands/index.html.erb within layouts/application
+  [1m[36mBand Load (0.7ms)[0m  [1m[34mSELECT "bands".* FROM "bands"[0m
+  ↳ app/views/bands/index.html.erb:4
+  Rendered bands/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 43ms (Views: 37.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/bands/new" for ::1 at 2019-07-28 12:51:26 -0600
+Processing by BandsController#new as HTML
+  Rendering bands/new.html.erb within layouts/application
+  Rendered bands/_form.html.erb (1.3ms)
+  Rendered bands/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 52ms (Views: 51.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/bands" for ::1 at 2019-07-28 12:51:52 -0600
+Processing by BandsController#create as HTML
+  Parameters: {"authenticity_token"=>"DOyUUVssHzN/lka7MNLEa029zRvRTI4/WJi4ulHJOmoV77r054DWz/nIgBUqQstmzO9vPWzQe5h5eEdAMHwl3Q==", "band"=>{"name"=>"What are pickles?"}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[36mBand Exists (2.0ms)[0m  [1m[34mSELECT  1 AS one FROM "bands" WHERE "bands"."name" = $1 LIMIT $2[0m  [["name", "What are pickles?"], ["LIMIT", 1]]
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[36mBand Create (22.1ms)[0m  [1m[32mINSERT INTO "bands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "What are pickles?"], ["created_at", "2019-07-28 18:51:52.774822"], ["updated_at", "2019-07-28 18:51:52.774822"]]
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/bands_controller.rb:18
+Completed 500 Internal Server Error in 29ms (ActiveRecord: 24.6ms)
+
+
+
+PG::UniqueViolation - ERROR:  duplicate key value violates unique constraint "bands_pkey"
+DETAIL:  Key (id)=(1) already exists.
+:
+  app/controllers/bands_controller.rb:18:in `create'
+
+Started POST "/__better_errors/3a36998704b339a0/variables" for ::1 at 2019-07-28 12:51:53 -0600
+Started GET "/bands" for ::1 at 2019-07-28 12:54:15 -0600
+Processing by BandsController#index as HTML
+  Rendering bands/index.html.erb within layouts/application
+  [1m[36mBand Load (0.6ms)[0m  [1m[34mSELECT "bands".* FROM "bands"[0m
+  ↳ app/views/bands/index.html.erb:4
+  Rendered bands/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 40ms (Views: 36.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/bands/new" for ::1 at 2019-07-28 12:54:24 -0600
+Processing by BandsController#new as HTML
+  Rendering bands/new.html.erb within layouts/application
+  Rendered bands/_form.html.erb (0.8ms)
+  Rendered bands/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 43ms (Views: 41.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/bands" for ::1 at 2019-07-28 12:54:32 -0600
+Processing by BandsController#create as HTML
+  Parameters: {"authenticity_token"=>"6utiqnWmwhHI3A2SbjNt3WuNzvc8S+hoYvZKavQQYTDz6EwPyQoL7U6Cyzx0o2LQ6t9s0YHXHc9DFrWQlaV+hw==", "band"=>{"name"=>"What are pickles?"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[36mBand Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "bands" WHERE "bands"."name" = $1 LIMIT $2[0m  [["name", "What are pickles?"], ["LIMIT", 1]]
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[36mBand Create (6.2ms)[0m  [1m[32mINSERT INTO "bands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "What are pickles?"], ["created_at", "2019-07-28 18:54:32.844323"], ["updated_at", "2019-07-28 18:54:32.844323"]]
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/bands_controller.rb:18
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 7.2ms)
+
+
+
+PG::UniqueViolation - ERROR:  duplicate key value violates unique constraint "bands_pkey"
+DETAIL:  Key (id)=(2) already exists.
+:
+  app/controllers/bands_controller.rb:18:in `create'
+
+Started POST "/__better_errors/0a7ee7ce4a4ae849/variables" for ::1 at 2019-07-28 12:54:33 -0600
+Started GET "/bands/new" for ::1 at 2019-07-28 13:19:44 -0600
+Processing by BandsController#new as HTML
+  Rendering bands/new.html.erb within layouts/application
+  Rendered bands/new.html.erb within layouts/application (8.0ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.0ms)
+
+
+
+ActionView::MissingTemplate - Missing partial shared/_errors with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/Users/stan/Desktop/a_a_Immersive /a:A_HomeWork/W9D5_RAILS/music_app/app/views"
+:
+  app/views/bands/new.html.erb:4:in `_app_views_bands_new_html_erb__1979435454171073451_70302018145620'
+  app/controllers/bands_controller.rb:12:in `new'
+
+Started POST "/__better_errors/85b8714015e678a5/variables" for ::1 at 2019-07-28 13:19:44 -0600
+Started GET "/bands" for ::1 at 2019-07-28 13:19:56 -0600
+Processing by BandsController#index as HTML
+  Rendering bands/index.html.erb within layouts/application
+  [1m[36mBand Load (1.1ms)[0m  [1m[34mSELECT "bands".* FROM "bands"[0m
+  ↳ app/views/bands/index.html.erb:4
+  Rendered bands/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 46ms (Views: 41.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/bands/new" for ::1 at 2019-07-28 13:19:59 -0600
+Processing by BandsController#new as HTML
+  Rendering bands/new.html.erb within layouts/application
+  Rendered bands/_form.html.erb (1.3ms)
+  Rendered bands/new.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 59ms (Views: 57.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/bands" for ::1 at 2019-07-28 13:20:03 -0600
+Processing by BandsController#create as HTML
+  Parameters: {"authenticity_token"=>"5m652NeLkW2S5xFjZpl9lY0eDzycAzM+uaLoze0ZN/T/bZd9aydYkRS51818CXKYDEytGiGfxpmYQhc3jKwoQw==", "band"=>{"name"=>"What are pickles?"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[36mBand Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "bands" WHERE "bands"."name" = $1 LIMIT $2[0m  [["name", "What are pickles?"], ["LIMIT", 1]]
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[36mBand Create (10.0ms)[0m  [1m[32mINSERT INTO "bands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "What are pickles?"], ["created_at", "2019-07-28 19:20:03.706751"], ["updated_at", "2019-07-28 19:20:03.706751"]]
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/bands_controller.rb:18
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 11.5ms)
+
+
+
+PG::UniqueViolation - ERROR:  duplicate key value violates unique constraint "bands_pkey"
+DETAIL:  Key (id)=(3) already exists.
+:
+  app/controllers/bands_controller.rb:18:in `create'
+
+Started POST "/__better_errors/a0e63329b3219d93/variables" for ::1 at 2019-07-28 13:20:03 -0600
+Started POST "/bands" for ::1 at 2019-07-28 13:24:17 -0600
+Processing by BandsController#create as HTML
+  Parameters: {"authenticity_token"=>"9LWOiCr5rSBqsEOJuIdlWx1HlSFF5kPscwTXPEHKXvXttqAtllVk3OzuhSeiF2pWnBU3B/h6tktS5CjGIH9BQg==", "band"=>{"name"=>"What are pickles?"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "P4eoBsCvYORnVmvrtsah0w"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13
+Completed 500 Internal Server Error in 44ms (ActiveRecord: 13.6ms)
+
+
+
+NoMethodError - undefined method `bands' for #<User:0x00007fe0e7e5e000>:
+  app/controllers/bands_controller.rb:16:in `create'
+
+Started POST "/__better_errors/ceb775ee388a8fd7/variables" for ::1 at 2019-07-28 13:24:17 -0600
+Started POST "/bands" for ::1 at 2019-07-28 13:25:29 -0600
+Processing by BandsController#create as HTML
+  Parameters: {"authenticity_token"=>"9LWOiCr5rSBqsEOJuIdlWx1HlSFF5kPscwTXPEHKXvXttqAtllVk3OzuhSeiF2pWnBU3B/h6tktS5CjGIH9BQg==", "band"=>{"name"=>"What are pickles?"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[36mBand Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "bands" WHERE "bands"."name" = $1 LIMIT $2[0m  [["name", "What are pickles?"], ["LIMIT", 1]]
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[36mBand Create (8.3ms)[0m  [1m[32mINSERT INTO "bands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "What are pickles?"], ["created_at", "2019-07-28 19:25:30.033762"], ["updated_at", "2019-07-28 19:25:30.033762"]]
+  ↳ app/controllers/bands_controller.rb:18
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/bands_controller.rb:18
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 15.3ms)
+
+
+
+PG::UniqueViolation - ERROR:  duplicate key value violates unique constraint "bands_pkey"
+DETAIL:  Key (id)=(4) already exists.
+:
+  app/controllers/bands_controller.rb:18:in `create'
+
+Started POST "/__better_errors/f996a6e827a299cc/variables" for ::1 at 2019-07-28 13:25:30 -0600
+Started POST "/bands" for ::1 at 2019-07-28 13:26:40 -0600
+Processing by BandsController#create as HTML
+  Parameters: {"authenticity_token"=>"9LWOiCr5rSBqsEOJuIdlWx1HlSFF5kPscwTXPEHKXvXttqAtllVk3OzuhSeiF2pWnBU3B/h6tktS5CjGIH9BQg==", "band"=>{"name"=>"What are pickles?"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/bands_controller.rb:23
+  [1m[36mBand Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "bands" WHERE "bands"."name" = $1 LIMIT $2[0m  [["name", "What are pickles?"], ["LIMIT", 1]]
+  ↳ app/controllers/bands_controller.rb:23
+  [1m[36mBand Create (8.0ms)[0m  [1m[32mINSERT INTO "bands" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "What are pickles?"], ["created_at", "2019-07-28 19:26:40.856413"], ["updated_at", "2019-07-28 19:26:40.856413"]]
+  ↳ app/controllers/bands_controller.rb:23
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/bands_controller.rb:23
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 14.7ms)
+
+
+
+PG::UniqueViolation - ERROR:  duplicate key value violates unique constraint "bands_pkey"
+DETAIL:  Key (id)=(5) already exists.
+:
+  app/controllers/bands_controller.rb:23:in `create'
+
+Started POST "/__better_errors/cc0679d2d2610cdd/variables" for ::1 at 2019-07-28 13:26:41 -0600
+Started POST "/bands" for ::1 at 2019-07-28 13:30:00 -0600
+Processing by BandsController#create as HTML
+  Parameters: {"authenticity_token"=>"9LWOiCr5rSBqsEOJuIdlWx1HlSFF5kPscwTXPEHKXvXttqAtllVk3OzuhSeiF2pWnBU3B/h6tktS5CjGIH9BQg==", "band"=>{"name"=>"What are pickles?"}}
+Completed 500 Internal Server Error in 233ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - undefined local variable or method `bands' for #<BandsController:0x00007fe0edb07518>
+Did you mean?  bands_url:
+  app/controllers/bands_controller.rb:21:in `create'
+
+Started POST "/__better_errors/e72fa0b40e2c1b81/variables" for ::1 at 2019-07-28 13:30:01 -0600
+Started POST "/bands" for ::1 at 2019-07-28 13:30:25 -0600
+Processing by BandsController#create as HTML
+  Parameters: {"authenticity_token"=>"9LWOiCr5rSBqsEOJuIdlWx1HlSFF5kPscwTXPEHKXvXttqAtllVk3OzuhSeiF2pWnBU3B/h6tktS5CjGIH9BQg==", "band"=>{"name"=>"What are pickles?"}}
+Completed 500 Internal Server Error in 258ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - undefined local variable or method `band' for #<BandsController:0x00007fe0e66224c8>:
+  app/controllers/bands_controller.rb:21:in `create'
+
+Started POST "/__better_errors/958d243416c7c158/variables" for ::1 at 2019-07-28 13:30:26 -0600
+Started POST "/bands" for ::1 at 2019-07-28 13:32:14 -0600
+Processing by BandsController#create as HTML
+  Parameters: {"authenticity_token"=>"9LWOiCr5rSBqsEOJuIdlWx1HlSFF5kPscwTXPEHKXvXttqAtllVk3OzuhSeiF2pWnBU3B/h6tktS5CjGIH9BQg==", "band"=>{"name"=>"What are pickles?"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "P4eoBsCvYORnVmvrtsah0w"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 7.0ms)
+
+
+
+NoMethodError - undefined method `bands' for #<User:0x00007fe0ee038730>:
+  app/controllers/bands_controller.rb:21:in `create'
+
+Started POST "/__better_errors/1873dd2278e4f0cf/variables" for ::1 at 2019-07-28 13:32:14 -0600

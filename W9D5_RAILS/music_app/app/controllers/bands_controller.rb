@@ -1,10 +1,15 @@
 class BandsController < ApplicationController
   #before_action :require_logged_in
   #before_action :require_user!, only: %i(new create edit update)
-  
+
   def index
     @bands = Band.all
     # render :index
+  end
+
+  def show
+    @band = Band.find(params[:name])
+    render :show
   end
 
   def new
@@ -13,25 +18,19 @@ class BandsController < ApplicationController
   end
 
   def create
-    @band = Band.new(band_params)
+    @band = current_user.bands.new(band_params)
 
     if @band.save
       flash[:notice] = "Success"
-      redirect_to bands_url
+      redirect_to band_url
     else
       flash[:errors] = @band.errors.full_messages
       render :new
     end
   end
 
-  def show
-    @band = Band.find(params[:id])
-    @albums = @band.albums
-    render :show
-  end
-
   def edit
-    @band = Band.find(params[:id])
+    @band = Band.find(params[:name])
 
     if @band
       render :edit
@@ -42,7 +41,7 @@ class BandsController < ApplicationController
   end
 
   def update
-    @band = Band.find(params[:id])
+    @band = Band.find(params[:name])
 
     if @band.update_attributes(band_params)
       redirect_to band_url(@band)
@@ -53,7 +52,7 @@ class BandsController < ApplicationController
   end
 
   def destroy
-    @band = Band.find(params[:id])
+    @band = Band.find(params[:name])
 
     if @band.destroy
       redirect_to bands_url
