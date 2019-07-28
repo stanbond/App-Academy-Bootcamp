@@ -1,10 +1,10 @@
 class BandsController < ApplicationController
   #before_action :require_logged_in
-  before_action :require_user!, only: %i(new create edit update)
+  #before_action :require_user!, only: %i(new create edit update)
   
   def index
     @bands = Band.all
-    render :index
+    # render :index
   end
 
   def new

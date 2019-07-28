@@ -6,15 +6,25 @@ class SessionsController < ApplicationController
       params[:user][:password]
     )
 
-    if user
-      login_user!(user)
-      #flash[:notice] = "Welcome back"
-      redirect_to bands_url
+    if user.nil?
+      flash.now[:errors] = ["You're not Too Short, but your password may be!"]
+      render :new
+
     else
-      flash[:errors] = "You're not Too Short, but your password may be!"
-      redirect_to new_session_url
+      login_user!(user)
+      redirect_to root_url
     end
   end
+
+    # if user
+    #   login_user!(user)
+    #   #flash[:notice] = "Welcome back"
+    #   redirect_to   bands_url
+    # else
+    #   flash[:errors] = "You're not Too Short, but your password may be!"
+    #   redirect_to new_session_url
+    # end
+    #end
 
   def destroy
     logout_user!
