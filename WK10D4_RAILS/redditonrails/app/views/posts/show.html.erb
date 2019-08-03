@@ -1,0 +1,46 @@
+<h1>Posts#show</h1>
+<%= @post.user.username %>
+<br>
+
+<label>
+    Title: <%= @post.title %>
+</label>
+<br>
+<label>
+    URL: <%= @post.url %>
+</label>
+<br>
+<a href="<%= posts_url %>">GO TO Posts</a>
+<br>
+<h1>COMMENTS</h1>
+<% @post.comments.each do |comment| %>
+    <ul>
+        <li><%= comment.body %></li>
+        <form action="<%=  post_comment_url(@comment) %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <%= auth_token %>
+
+            <label for="delete_comment">
+            Delete Comment
+            </label>
+                <input type="submit" value="Remove Comment">
+        </form>
+    </ul>
+<% end %>
+
+<br><br>
+<form action="<%= post_comments_url(@post) %>" method="post">
+<%= auth_token %>
+<ul>
+    <label for="add_comment">Add comment
+    <input
+    type="text"
+    name="comment[body"
+    id="add_comment">
+    </label>
+
+    <input type="submit" value="Add Comment"> 
+</ul>
+</form>
+
+

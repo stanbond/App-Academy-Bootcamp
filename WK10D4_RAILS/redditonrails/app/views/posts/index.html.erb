@@ -1,0 +1,5 @@
+<h1>All Posts</h1>
+
+<% @posts.each do |post| %>
+    <a href="<%= post_url(post) %>"><%= post.title%></a>
+<% end %>
