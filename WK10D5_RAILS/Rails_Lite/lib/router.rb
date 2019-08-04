@@ -17,7 +17,6 @@ class Route
   # instantiate controller and call controller action
   def run(req, res)
     controller = ControllerBase.new(req, res)
-    # debugger
     controller.invoke_action(@action_name)
   end
 end
@@ -37,18 +36,22 @@ class Router
   # evaluate the proc in the context of the instance
   # for syntactic sugar :)
   def draw(&proc)
+
   end
 
   # make each of these methods that
   # when called add route
   [:get, :post, :put, :delete].each do |http_method|
+
   end
 
   # should return the route that matches this request
   def match(req)
+
   end
 
   # either throw 404 or call run on a matched route
   def run(req, res)
+    
   end
 end

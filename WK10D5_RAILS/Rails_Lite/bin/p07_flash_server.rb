@@ -35,7 +35,6 @@ class Dog
 
   def save
     return false unless valid?
-
     Dog.all << self
     true
   end
