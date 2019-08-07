@@ -1,0 +1,1 @@
+Rails project part 2. Rails Lite
