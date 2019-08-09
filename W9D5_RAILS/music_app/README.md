@@ -12,6 +12,7 @@ Be able to trigger controller actions from views using forms and links
 Know how to check that a current user exists before displaying content
 
 _______________________________________________________________________________
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

@@ -1,2 +1,5 @@
 # App Academy Homeworks
-# Majority of a/A projects and HW
+# a/A projects and HW
+_____________________________________
+
+Ruby, Rails, SQL, JS, CSS, HTML, ..
