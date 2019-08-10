@@ -1,0 +1,8 @@
+/* PHASE 6: Sidebar */
+
+.cat-pic{
+    display: block;
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
