@@ -1,0 +1,8 @@
+/* PHASE 11: Icons */
+.profile-nav > i{
+   width: 20px;
+}
+
+[class*="icon-"] {
+  display: 20px
+}
