@@ -1,0 +1,23 @@
+html {
+    background-color: salmon;
+    color: yellow;
+}
+
+h1 {
+    font-size: 50px;
+    color: purple;
+    background-color: green;
+    border-radius: 25%;
+    border: 3px dashed brown;
+    padding: 10px;
+}
+
+.clock {
+    color: blue;
+    font-family: 'Comic Sans MS';
+    font-size: 25px;
+}
+
+.widget-clock {
+    font-family: 'Comic Sans MS';
+}
