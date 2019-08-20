@@ -13,9 +13,10 @@ h1 {
 }
 
 .clock {
-    color: blue;
-    font-family: 'Comic Sans MS';
+    color: rgb(73, 73, 170);
+    font-family: 'Courier New', Courier, monospace;
     font-size: 25px;
+    flex-wrap: inherit;
 }
 
 .widget-clock {
