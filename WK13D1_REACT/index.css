@@ -5,10 +5,10 @@ html {
 
 h1 {
     font-size: 50px;
-    color: purple;
-    background-color: green;
+    color: rgb(168, 59, 168);
+    background-color: rgb(46, 185, 46);
     border-radius: 25%;
-    border: 3px dashed brown;
+    border: 3px dashed rgb(179, 73, 73);
     padding: 10px;
 }
 
