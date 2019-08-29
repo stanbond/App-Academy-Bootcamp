@@ -2,4 +2,4 @@
 # a/A projects and HW
 _____________________________________
 
-Ruby, Rails, SQL, JS, CSS, HTML, ..
+Ruby, RubyonRails, SQL, JS, CSS, HTML, React, Redux, BigO, MetaProgramming
