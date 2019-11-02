@@ -27,14 +27,14 @@ function canFinish(numCourses, prerequisites) {
     let eligibleNodeExists = true;
     while (eligibleNodeExists) {
       eligibleNodeExists = false;
+      for(let destination in graph){
+        let validDestination = graph[destination].every((ele) => visited.has(ele));
+          if(!visited.has(destination) && validDestination){
+            eligibleNodeExists = true;
+            visited.add(destination)
+          }
+      }
     }
     
-  for(let destination in graph){
-    let validDestination = graph[destination].every((ele) => visited.has(ele));
-      if(!visited.has(destination) && validDestination){
-        eligibleNodeExists = true;
-        visited.add(destination)
-      }
-  }
   return visited.size === totalCourses
 }
