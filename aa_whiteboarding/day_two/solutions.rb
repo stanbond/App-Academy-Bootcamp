@@ -196,6 +196,6 @@ class Node
       return result if result
     end
 
-    
+    nil
   end
 end
